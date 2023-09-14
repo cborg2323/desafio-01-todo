@@ -1,0 +1,5 @@
+.wrapper {
+    display: flex;
+    max-width: 46rem;
+    margin: auto;
+}
