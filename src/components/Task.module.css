@@ -1,0 +1,55 @@
+.todoTaskBody {
+    background: var(--gray-500);
+    border-radius: 4px;
+    display: flex;
+    gap: 0.75rem;
+    height: 4.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--gray-400);
+}
+
+.todoTaskBody button {
+    background: var(--gray-500);
+    border: 0;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.checkTask {
+    color: var(--blue);
+}
+
+.checkTask:hover {
+    color: var(--blue-dark)
+}
+
+.iconDoneTask {
+    color: var(--purple-dark);
+}
+
+.iconDoneTask:hover {
+    color: var(--purple);
+}
+
+.trashTask {
+    color: var(--gray-300);
+}
+
+.trashTask:hover {
+    color: var(--danger);
+}
+
+.todoTaskBody span {
+    font-size: 0.875rem;
+}
+
+.textTaskTodo {
+    color: var(--gray-100);
+}
+
+.textTaskDone {
+    color: var(--gray-300);
+    text-decoration: line-through;
+}

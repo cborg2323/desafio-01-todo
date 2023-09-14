@@ -1,6 +1,7 @@
 import { PlusCircle } from 'phosphor-react';
 
 import styles from './TaskBoard.module.css';
+import { Task } from './Task';
 
 export function TaskBoard() {
     return (
@@ -28,6 +29,14 @@ export function TaskBoard() {
                     </div>
                     
                 </header>
+
+                <div className={styles.tasksList}>
+                    <Task />
+                    <Task />
+                    <Task />
+                    <Task taskDone={true} />
+                    <Task taskDone={true} />
+                </div>
             </div>
         </div>
     )}
