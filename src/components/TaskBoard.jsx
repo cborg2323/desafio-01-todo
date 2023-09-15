@@ -2,16 +2,86 @@ import { PlusCircle } from 'phosphor-react';
 
 import styles from './TaskBoard.module.css';
 import { Task } from './Task';
+import { useState } from 'react';
+
+import { v4 as uuidv4 } from 'uuid';
 
 export function TaskBoard() {
+    const [tasks, setTasks] = useState([
+        {
+            id: uuidv4(),
+            taskName: 'Lavar louça tarde',
+            done: false,
+        },
+        {
+            id: uuidv4(),
+            taskName: 'Recolher roupas varal',
+            done: false,
+        },
+        {
+            id: uuidv4(),
+            taskName: 'Guardar roupas na arara',
+            done: false,
+        },
+        {
+            id: uuidv4(),
+            taskName: 'Lavar louça manhã',
+            done: true,
+        },
+        {
+            id: uuidv4(),
+            taskName: 'Almoço',
+            done: true,
+        },
+    ]);
+
+    const [newTaskText, setNewTaskText] = useState('');
+
+    const doneTaskCount = tasks.filter(task => {
+        if(task.done){
+            return true;
+        }
+        return false;
+    }).length;
+
+    function handleNewTaskChange() {
+        event.target.setCustomValidity('');
+        setNewTaskText(event.target.value);
+    }
+
+    function handleCreateNewTask() {
+        event.preventDefault();
+
+        const newTask = {
+            id: uuidv4(),
+            taskName: newTaskText,
+            done: false
+        };
+
+        setTasks([...tasks, newTask]);
+        setNewTaskText('');
+    }
+
+    function deleteTask(taskIdToDelete) {
+        const tasksWithoutDeletedOne = tasks.filter(task => {
+            return task.id !== taskIdToDelete;
+        })
+
+        setTasks(tasksWithoutDeletedOne);
+    }
+
     return (
         <div>
-            <form className={styles.newTaskForm}>
+            <form onSubmit={handleCreateNewTask} className={styles.newTaskForm}>
                 <textarea
+                    name='task'
                     placeholder='Adicione uma nova tarefa'
-                ></textarea>
+                    value={newTaskText}
+                    onChange={handleNewTaskChange}
+                    required
+                />
 
-                <button>
+                <button type='submit'>
                     Criar
                     <PlusCircle size={16} />
                 </button>
@@ -21,21 +91,28 @@ export function TaskBoard() {
                 <header>
                     <div>
                         <span className={styles.criadas}>Tarefas criadas</span>
-                        <span className={styles.counter}>5</span>
+                        <span className={styles.counter}>{tasks.length}</span>
                     </div>
                     <div>
                         <span className={styles.concluidas}>Concluídas</span> 
-                        <span className={styles.counter}>2 de 5</span>
+                        <span className={styles.counter}>{doneTaskCount} de {tasks.length}</span>
                     </div>
                     
                 </header>
 
                 <div className={styles.tasksList}>
-                    <Task />
-                    <Task />
-                    <Task />
-                    <Task taskDone={true} />
-                    <Task taskDone={true} />
+                    {tasks.map(task => {
+                        return (
+                            <Task  
+                                key={task.id}
+                                id={task.id}
+                                content={task.taskName}
+                                taskDone={task.done}
+                                onDeleteTask={deleteTask}
+                            />
+                        )
+                    })}
+                    
                 </div>
             </div>
         </div>

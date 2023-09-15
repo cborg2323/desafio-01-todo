@@ -4,7 +4,7 @@
     display: flex;
     gap: 0.75rem;
     height: 4.5rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     border: 1px solid var(--gray-400);
@@ -15,6 +15,11 @@
     border: 0;
     cursor: pointer;
     transition: background-color 0.1s;
+}
+
+.buttonSpanTask {
+    display: flex;
+    gap: 0.75rem;
 }
 
 .checkTask {
