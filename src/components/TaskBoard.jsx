@@ -70,6 +70,19 @@ export function TaskBoard() {
         setTasks(tasksWithoutDeletedOne);
     }
 
+    function doneTask(taskIdToDone) {
+        const tasksWithTaskDone = tasks.map(task => {
+            if(task.id === taskIdToDone && task.done === false) {
+                task.done = true;
+            } else if(task.id === taskIdToDone && task.done === true) {
+                task.done = false;
+            }
+            return task;
+        })
+
+        setTasks(tasksWithTaskDone);
+    }
+
     return (
         <div>
             <form onSubmit={handleCreateNewTask} className={styles.newTaskForm}>
@@ -109,6 +122,7 @@ export function TaskBoard() {
                                 content={task.taskName}
                                 taskDone={task.done}
                                 onDeleteTask={deleteTask}
+                                onDoneTask={doneTask}
                             />
                         )
                     })}
