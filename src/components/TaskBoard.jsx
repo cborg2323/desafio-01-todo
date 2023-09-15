@@ -1,4 +1,4 @@
-import { PlusCircle } from 'phosphor-react';
+import { PlusCircle, ClipboardText } from 'phosphor-react';
 
 import styles from './TaskBoard.module.css';
 import { Task } from './Task';
@@ -114,19 +114,28 @@ export function TaskBoard() {
                 </header>
 
                 <div className={styles.tasksList}>
-                    {tasks.map(task => {
-                        return (
-                            <Task  
-                                key={task.id}
-                                id={task.id}
-                                content={task.taskName}
-                                taskDone={task.done}
-                                onDeleteTask={deleteTask}
-                                onDoneTask={doneTask}
-                            />
-                        )
-                    })}
                     
+                    {
+                        tasks.length === 0 ?
+                            <div className={styles.emptyTaskList}>
+                                <ClipboardText weight='light' size={56} className={styles.clipBoard} />
+                                <strong>Você ainda não tem tarefas cadastradas</strong>
+                                <p>Crie tarefas e organize seus itens a fazer</p>
+                            </div>
+                        :
+                            tasks.map(task => {
+                                return (
+                                    <Task  
+                                        key={task.id}
+                                        id={task.id}
+                                        content={task.taskName}
+                                        taskDone={task.done}
+                                        onDeleteTask={deleteTask}
+                                        onDoneTask={doneTask}
+                                    />
+                                )
+                            })
+                    }
                 </div>
             </div>
         </div>

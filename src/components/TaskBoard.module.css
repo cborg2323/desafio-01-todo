@@ -93,3 +93,19 @@
     gap: 0.75rem;
     flex-direction: column;
 }
+
+.emptyTaskList {
+    color: var(--gray-300);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+.emptyTaskList strong {
+    margin-top: 1rem;
+}
+
+.clipBoard {
+    color: var(--gray-400);
+}
